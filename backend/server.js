@@ -10,11 +10,7 @@ const app = express();
 
 dotenv.config();
 
-app.use(
-	express.urlencoded({
-		extended: true,
-	})
-);
+app.use(express.json());
 app.use(morgan("dev"));
 
 app.route("/register").post(registerUser);
