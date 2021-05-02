@@ -3,12 +3,14 @@ import dotenv from "dotenv";
 import colors from "colors";
 import morgan from "morgan";
 
+import connectDB from "./config/db.js";
 import errorMiddleware from "./middleware/errorMiddleware.js";
 import { loginUser, registerUser } from "./controllers/userController.js";
 
 const app = express();
 
 dotenv.config();
+connectDB();
 
 app.use(express.json());
 app.use(morgan("dev"));
