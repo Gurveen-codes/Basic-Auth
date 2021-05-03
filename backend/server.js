@@ -12,10 +12,14 @@ const app = express();
 dotenv.config();
 connectDB();
 
+//Accept json data in req body
 app.use(express.json());
+// for parsing application/xwww-
+app.use(express.urlencoded({ extended: true }));
+//form-urlencoded
 app.use(morgan("dev"));
 
-app.route("/register").post(registerUser);
+app.post("/register", registerUser);
 app.route("/login").post(loginUser);
 
 app.get("/", (req, res) => {

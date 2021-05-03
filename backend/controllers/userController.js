@@ -4,7 +4,7 @@ import User from "../model/userModel.js";
 const registerUser = asyncHandler(async (req, res) => {
 	const { name, email, password } = req.body;
 
-	const alreadyExist = await User.find({ email });
+	const alreadyExist = await User.findOne({ email });
 
 	if (alreadyExist) {
 		res.status(400);
@@ -22,13 +22,12 @@ const registerUser = asyncHandler(async (req, res) => {
 
 const loginUser = asyncHandler(async (req, res) => {
 	const { email, password } = req.body;
-
 	const user = await User.findOne({ email });
 	if (user) {
-		if(user.password !== password){
-            res.status(401);
-            throw new Error("Invalid Password")
-        }
+		if (user.password !== password) {
+			res.status(401);
+			throw new Error("Invalid Password");
+		}
 		res.status(200).json(user);
 	} else {
 		res.status(404);
