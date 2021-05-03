@@ -1,4 +1,5 @@
 import asyncHandler from "express-async-handler";
+import bcrypt from "bcryptjs";
 import User from "../model/userModel.js";
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -10,28 +11,37 @@ const registerUser = asyncHandler(async (req, res) => {
 		res.status(400);
 		throw new Error("User already exist");
 	} else {
-		const user = await User.create({ name, email, password });
+		const user = await User.create({
+			name,
+			email,
+			password: bcrypt.hashSync(password, 10),
+		});
 		if (!user) {
 			res.status(400);
 			throw new Error("Invalid user details");
 		}
 		res.status(201);
-		res.json(user);
+		res.json({
+			_id: user._id,
+			name: user.name,
+			email: user.email,
+		});
 	}
 });
 
 const loginUser = asyncHandler(async (req, res) => {
 	const { email, password } = req.body;
 	const user = await User.findOne({ email });
-	if (user) {
-		if (user.password !== password) {
-			res.status(401);
-			throw new Error("Invalid Password");
-		}
-		res.status(200).json(user);
+	if (user && (await user.matchPassword(password))) {
+		res.status(200);
+		res.json({
+			_id: user._id,
+			name: user.name,
+			email: user.email,
+		});
 	} else {
-		res.status(404);
-		throw new Error("User not found");
+		res.status(401);
+		throw new Error("Invalid email or password");
 	}
 });
 
