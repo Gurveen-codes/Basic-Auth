@@ -1,5 +1,3 @@
-// const axios = require(axios);
-
 const showPassword = () => {
 	let x = document.getElementById("password");
 	if (x.type === "password") {
@@ -9,20 +7,20 @@ const showPassword = () => {
 	}
 };
 
-const loginForm = document.querySelector(".login-form");
+const form = document.querySelector("form");
 
-loginForm.addEventListener("submit", (e) => {
+form.addEventListener("submit", function (e) {
 	e.preventDefault();
-	const formData = new FormData(loginForm);
-	let loginData = {};
+	const formData = new FormData(form);
+	let myData = {};
 	for (let val of formData.entries()) {
-		loginData[val[0]] = val[1];
+		myData[val[0]] = val[1];
 	}
 
 	axios({
 		method: "POST",
-		url: "http://127.0.0.1:8000/login",
-		data: loginData,
+		url: this.action,
+		data: myData,
 	})
 		.then((res) => console.log(res.data))
 		.catch((err) => console.log(err));
