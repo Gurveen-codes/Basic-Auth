@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import morgan from "morgan";
+import cors from "cors";
 
 import connectDB from "./config/db.js";
 import errorMiddleware from "./middleware/errorMiddleware.js";
@@ -12,11 +13,22 @@ const app = express();
 dotenv.config();
 connectDB();
 
+app.use(cors());
+
+/*  app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin, X-Requested-With, Content-Type, Accept"
+	);
+	next();
+});*/
+
 //Accept json data in req body
 app.use(express.json());
-// for parsing application/xwww-
+// for parsing application/xwww-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-//form-urlencoded
+
 app.use(morgan("dev"));
 
 app.post("/register", registerUser);

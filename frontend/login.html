@@ -4,14 +4,21 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<link rel="stylesheet" href="style.css" />
+		<script defer src="app.js"></script>
+
 		<title>Login</title>
 	</head>
 	<body>
 		<button class="back-btn"><a href="index.html">Go Back</a></button>
 		<div class="container">
 			<h1 class="form-title">Login</h1>
-			<form action="http://127.0.0.1:8000/login" method="post">
+			<form
+				class="login-form"
+				action="http://127.0.0.1:8000/login"
+				method="post"
+			>
 				<div class="form-el">
 					<label for="email">Email: </label>
 					<input
@@ -31,6 +38,10 @@
 						placeholder="Enter your password"
 						required
 					/>
+				</div>
+				<!-- An element to toggle between password visibility -->
+				<div>
+					<input type="checkbox" onclick="showPassword()" /> Show Password
 				</div>
 				<button type="reset">Reset</button>
 				<button type="submit">Submit</button>
