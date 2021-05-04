@@ -23,7 +23,7 @@ app.post("/register", registerUser);
 app.route("/login").post(loginUser);
 
 app.get("/", (req, res) => {
-	res.json({ message: "Hello There!" });
+	res.send(req.body);
 });
 
 app.use(errorMiddleware);
