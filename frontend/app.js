@@ -24,7 +24,7 @@ form.addEventListener("submit", function (e) {
 	})
 		.then(({ data }) => {
 			localStorage.setItem("currentUser", JSON.stringify(data));
-			window.location.replace("index.html");
+			// window.location.replace("index.html");
 		})
 		.catch((err) => console.log(err));
 });
