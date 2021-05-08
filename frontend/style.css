@@ -51,6 +51,10 @@ body {
 	color: inherit;
 }
 
+.dashboard .logout-btn {
+	visibility: hidden;
+}
+
 /* Form Screens */
 .container {
 	display: flex;

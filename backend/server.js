@@ -1,20 +1,21 @@
-import express from "express";
-import dotenv from "dotenv";
-import colors from "colors";
-import morgan from "morgan";
-import cors from "cors";
-import sessions from "client-sessions";
+import path from 'path'
+import express from 'express'
+import dotenv from 'dotenv'
+import colors from 'colors'
+import morgan from 'morgan'
+import cors from 'cors'
+// import sessions from 'client-sessions'
 
-import connectDB from "./config/db.js";
-import errorMiddleware from "./middleware/errorMiddleware.js";
-import { loginUser, registerUser } from "./controllers/userController.js";
+import connectDB from './config/db.js'
+import errorMiddleware from './middleware/errorMiddleware.js'
+import { loginUser, registerUser } from './controllers/userController.js'
 
-const app = express();
+const app = express()
 
-dotenv.config();
-connectDB();
+dotenv.config()
+connectDB()
 
-app.use(cors());
+app.use(cors())
 
 /*  app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
@@ -34,21 +35,24 @@ app.use(cors());
 // 	})
 // );
 //Accept json data in req body
-app.use(express.json());
+app.use(express.json())
 // for parsing application/xwww-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
 
-app.use(morgan("dev"));
+app.use(morgan('dev'))
 
-app.post("/register", registerUser);
-app.route("/login").post(loginUser);
+app.post('/register', registerUser)
+app.route('/login').post(loginUser)
 
-app.get("/", (req, res) => {
-	res.send(req.body);
-});
+const __dirname = path.resolve()
+app.use(express.static(path.join(__dirname, '/frontend')))
 
-app.use(errorMiddleware);
+app.get('*', (req, res) => {
+	res.sendFile(path.resolve(__dirname, 'frontend', 'index.html'))
+})
+
+app.use(errorMiddleware)
 
 app.listen(process.env.PORT, () => {
-	console.log(`Server is running on port ${process.env.PORT}`.yellow.bold);
-});
+	console.log(`Server is running on port ${process.env.PORT}`.yellow.bold)
+})
