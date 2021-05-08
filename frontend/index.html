@@ -8,26 +8,27 @@
 		<title>Basic Auth</title>
 	</head>
 	<body>
-		<h1 class="title">Hi! I am Dashboard</h1>
-		<button><a href="register.html">Register</a></button>
-		<button><a href="login.html">Login</a></button>
-		<button class="logout-btn">Logout</button>
+		<div class="dashboard">
+			<h1 class="title">Hi, Stranger!</h1>
+			<div class="db-btn">
+				<button><a href="register.html">Register</a></button>
+				<button><a href="login.html">Login</a></button>
+				<button class="logout-btn">Logout</button>
+			</div>
+		</div>
 	</body>
 	<script>
-		const user = JSON.parse(localStorage.getItem("currentUser"));
-		if (!user) {
-			window.location.replace("login.html");
-		}
+		const user = JSON.parse(localStorage.getItem('currentUser'))
 
-		const title = document.querySelector(".title");
-		title.textContent = `Hello ${user.name}!`;
+		const title = document.querySelector('.title')
+		title.textContent = `Hello ${user.name}!`
 
-		const logout = document.querySelector(".logout-btn");
-		logout.addEventListener("click", () => {
+		const logout = document.querySelector('.logout-btn')
+		logout.addEventListener('click', () => {
 			if (user) {
-				localStorage.removeItem("currentUser");
-				window.location.replace("login.html");
+				localStorage.removeItem('currentUser')
+				window.location.replace('login.html')
 			}
-		});
+		})
 	</script>
 </html>
