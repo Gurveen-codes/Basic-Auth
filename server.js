@@ -41,11 +41,11 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(morgan('dev'))
 
-app.post('/register', registerUser)
-app.route('/login').post(loginUser)
-
 const __dirname = path.resolve()
 app.use(express.static(path.join(__dirname, '/frontend')))
+
+app.post('/register', registerUser)
+app.route('/login').post(loginUser)
 
 app.get('*', (req, res) => {
 	res.sendFile(path.resolve(__dirname, 'frontend', 'index.html'))
