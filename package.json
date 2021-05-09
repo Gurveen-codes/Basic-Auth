@@ -6,13 +6,12 @@
 	"type": "module",
 	"scripts": {
 		"start": "node server.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"dev": "nodemon server"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
 		"bcryptjs": "^2.4.3",
-		"client-sessions": "^0.8.0",
 		"colors": "^1.4.0",
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",

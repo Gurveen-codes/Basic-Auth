@@ -1,18 +1,18 @@
-//* Show User on Dashboard
-const user = JSON.parse(localStorage.getItem('currentUser'))
-if (user) {
-	const title = document.querySelector('.title')
-	title.textContent = `Hello ${user.name}!`
+// //* Show User on Dashboard
+// const user = JSON.parse(localStorage.getItem('currentUser'))
+// if (user) {
+// 	const title = document.querySelector('.title')
+// 	title.textContent = `Hello ${user.name}!`
 
-	const logout = document.querySelector('.logout-btn')
-	logout.style.visibility = 'visible'
-	logout.addEventListener('click', () => {
-		if (user) {
-			localStorage.removeItem('currentUser')
-			window.location.replace('index.html')
-		}
-	})
-}
+// 	const logout = document.querySelector('.logout-btn')
+// 	logout.style.visibility = 'visible'
+// 	logout.addEventListener('click', () => {
+// 		if (user) {
+// 			localStorage.removeItem('currentUser')
+// 			window.location.replace('index.html')
+// 		}
+// 	})
+// }
 
 //* Show Password
 const showPassword = () => {
@@ -43,7 +43,7 @@ if (form) {
 		})
 			.then(({ data }) => {
 				localStorage.setItem('currentUser', JSON.stringify(data))
-				window.location.replace('index.html')
+				window.location.href = '/'
 			})
 			.catch((err) => console.log(err))
 	})

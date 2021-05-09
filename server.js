@@ -4,7 +4,6 @@ import dotenv from 'dotenv'
 import colors from 'colors'
 import morgan from 'morgan'
 import cors from 'cors'
-// import sessions from 'client-sessions'
 
 import connectDB from './config/db.js'
 import errorMiddleware from './middleware/errorMiddleware.js'
@@ -27,13 +26,7 @@ app.use(cors())
 });*/
 
 //* Session Middleware
-// app.use(
-// 	sessions({
-// 		cookieName: "session",
-// 		secret: process.env.SESSION_SECRET,
-// 		duration: 30 * 60 * 1000,
-// 	})
-// );
+
 //Accept json data in req body
 app.use(express.json())
 // for parsing application/xwww-form-urlencoded
@@ -43,6 +36,18 @@ app.use(morgan('dev'))
 
 const __dirname = path.resolve()
 app.use(express.static(path.join(__dirname, '/frontend')))
+
+app.get('/', (req, res) => {
+	res.sendFile(path.resolve(__dirname, 'frontend', 'index.html'))
+})
+
+app.get('/register', (req, res) => {
+	res.sendFile(path.resolve(__dirname, 'frontend', 'register.html'))
+})
+
+app.get('/login', (req, res) => {
+	res.sendFile(path.resolve(__dirname, 'frontend', 'login.html'))
+})
 
 app.post('/register', registerUser)
 app.route('/login').post(loginUser)
