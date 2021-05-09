@@ -21,6 +21,7 @@ const registerUser = asyncHandler(async (req, res) => {
 			throw new Error('Invalid user details')
 		}
 		res.status(201)
+		req.session.userId = user._id
 		res.json({
 			_id: user._id,
 			name: user.name,
@@ -35,6 +36,7 @@ const loginUser = asyncHandler(async (req, res) => {
 	const user = await User.findOne({ email })
 	if (user && (await user.matchPassword(password))) {
 		res.status(200)
+		req.session.userId = user._id
 		res.json({
 			_id: user._id,
 			name: user.name,
