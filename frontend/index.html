@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="style.css" />
+		<script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<script defer src="app.js"></script>
 		<title>Basic Auth</title>
 	</head>
@@ -14,6 +15,10 @@
 			<div class="db-btn">
 				<button><a href="/register">Register</a></button>
 				<button><a href="/login">Login</a></button>
+				<form action="/logout" method="get" class="logout-btn">
+					<input type="submit" value="Logout" />
+				</form>
+				<button class="admin"><a href="/admin">Admin</a></button>
 			</div>
 		</div>
 	</body>

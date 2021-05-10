@@ -30,14 +30,13 @@ app.use(cors())
 //* Session Middleware
 app.use(
 	session({
-		name: 'sid',
+		name: process.env.SESSION_NAME,
 		resave: false,
 		saveUninitialized: false,
 		secret: process.env.SESSION_SECRET,
 		cookie: {
 			maxAge: 1000 * 60 * 30, //30 minutes
 			sameSite: true,
-			secure: process.env.NODE_ENV === 'production',
 		},
 	})
 )
@@ -71,6 +70,16 @@ app.get('/', (req, res) => {
 
 app.post('/register', registerUser)
 app.post('/login', loginUser)
+
+app.get('/logout', isLoggedIn, (req, res) => {
+	req.session.destroy((err) => {
+		if (err) {
+			console.log(err)
+		}
+		res.clearCookie(process.env.SESSION_NAME)
+		res.redirect('/')
+	})
+})
 
 app.get('*', (req, res) => {
 	res.sendFile(path.resolve(__dirname, 'frontend', 'index.html'))

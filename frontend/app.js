@@ -1,19 +1,3 @@
-// //* Show User on Dashboard
-// const user = JSON.parse(localStorage.getItem('currentUser'))
-// if (user) {
-// 	const title = document.querySelector('.title')
-// 	title.textContent = `Hello ${user.name}!`
-
-// 	const logout = document.querySelector('.logout-btn')
-// 	logout.style.visibility = 'visible'
-// 	logout.addEventListener('click', () => {
-// 		if (user) {
-// 			localStorage.removeItem('currentUser')
-// 			window.location.replace('index.html')
-// 		}
-// 	})
-// }
-
 //* Show Password
 const showPassword = () => {
 	let x = document.getElementById('password')
@@ -25,7 +9,7 @@ const showPassword = () => {
 }
 
 //* Retreive and send form data
-const form = document.querySelector('form')
+const form = document.querySelector('.form')
 
 if (form) {
 	form.addEventListener('submit', function (e) {
@@ -46,5 +30,21 @@ if (form) {
 				window.location.href = '/'
 			})
 			.catch((err) => console.log(err))
+	})
+}
+
+//* Toggle logout button visibility
+const logout = document.querySelector('.logout-btn')
+const adminBtn = document.querySelector('.admin')
+const currentUser = localStorage.getItem('currentUser')
+if (logout && adminBtn && currentUser) {
+	adminBtn.style.visibility = 'visible'
+	logout.style.visibility = 'visible'
+}
+//remove currentUser from localStorage
+if (logout) {
+	logout.addEventListener('submit', () => {
+		localStorage.removeItem('currentUser')
+		// window.location.href = '/'
 	})
 }
